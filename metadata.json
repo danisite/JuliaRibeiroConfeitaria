@@ -1,0 +1,6 @@
+{
+  "name": "Julia Ribeiro Confeitaria",
+  "description": "Catálogo de bolos e doces artesanais e sistema de encomendas via WhatsApp em Belo Horizonte. Bolos decorados, doces finos e sobremesas artesanais.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
