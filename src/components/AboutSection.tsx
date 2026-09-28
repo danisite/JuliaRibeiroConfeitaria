@@ -15,7 +15,7 @@ export const AboutSection: React.FC = () => {
               {/* Primary photo (maior) */}
               <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white aspect-[3/4] bg-[#F7ECE7]">
                 <img
-                  src="https://cdn.phototourl.com/free/2026-09-20-7c612f79-24e6-470a-adf8-ab14803c8dcc.jpg"
+                  src="https://i.postimg.cc/B62b9jn5/juliiaribeiroconfeitaria-20260928-0001.jpg"
                   alt="Julia Ribeiro Confeitaria Artesanal"
                   className="w-full h-full object-cover"
                   loading="lazy"
