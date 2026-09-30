@@ -1,15 +1,13 @@
 import React from 'react';
-import { ArrowDown, Sparkles, Clock, Heart, Award, Instagram } from 'lucide-react';
-import { WhatsAppIcon } from './WhatsAppIcon';
-import { TikTokIcon } from './TikTokIcon';
+import { Sparkles, Clock, Heart, Award } from 'lucide-react';
 import { CONFEITARIA_INFO } from '../data/sweets';
 
 interface HeroProps {
-  onExploreCatalog: () => void;
-  onOpenOrder: () => void;
+  onExploreCatalog?: () => void;
+  onOpenOrder?: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onExploreCatalog, onOpenOrder }) => {
+export const Hero: React.FC<HeroProps> = () => {
   return (
     <section id="inicio" className="relative overflow-hidden pt-8 pb-14 lg:pt-14 lg:pb-20 bg-gradient-to-b from-[#FCFAF8] via-[#FAF3F0]/60 to-[#FCFAF8]">
       {/* Delicate background decorative glow orbs */}
@@ -38,49 +36,6 @@ export const Hero: React.FC<HeroProps> = ({ onExploreCatalog, onOpenOrder }) => 
             <Heart className="w-3.5 h-3.5 text-[#D48B78] fill-[#D48B78]" />
             <span>Doces artesanais sob encomenda em Belo Horizonte</span>
           </p>
-        </div>
-
-        {/* Primary Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-10">
-          <button
-            id="hero-explore-catalog-btn"
-            onClick={onExploreCatalog}
-            className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-[#3D2E2B] text-white text-sm font-semibold hover:bg-[#523F3C] transition shadow-md hover:shadow-lg flex items-center justify-center gap-2.5 cursor-pointer"
-          >
-            <span>Ver Cardápio Completo</span>
-            <ArrowDown className="w-4 h-4 text-[#F4DDD5]" />
-          </button>
-
-          <button
-            id="hero-whatsapp-order-btn"
-            onClick={onOpenOrder}
-            className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-[#EBF5EF] text-[#245C42] border border-[#C6E6D4] text-sm font-semibold hover:bg-[#DEF0E5] transition flex items-center justify-center gap-2 cursor-pointer shadow-xs"
-          >
-            <WhatsAppIcon className="w-4 h-4 fill-current text-[#2E6B4F]" />
-            <span>Montar Encomenda no WhatsApp</span>
-          </button>
-
-          <a
-            id="hero-instagram-link-btn"
-            href={CONFEITARIA_INFO.instagramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto px-5 py-3.5 rounded-full bg-[#FAF0EC] text-[#7D4538] border border-[#ECDCD5] text-sm font-semibold hover:bg-[#F5E4DC] transition flex items-center justify-center gap-2 cursor-pointer shadow-xs"
-          >
-            <Instagram className="w-4 h-4 text-[#A86454]" />
-            <span>{CONFEITARIA_INFO.instagram}</span>
-          </a>
-
-          <a
-            id="hero-tiktok-link-btn"
-            href={CONFEITARIA_INFO.tiktokUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto px-5 py-3.5 rounded-full bg-[#F4EFEA] text-[#2E2827] border border-[#E0D7D0] text-sm font-semibold hover:bg-[#ECE5DE] transition flex items-center justify-center gap-2 cursor-pointer shadow-xs"
-          >
-            <TikTokIcon className="w-4 h-4 text-[#2E2827]" />
-            <span>{CONFEITARIA_INFO.tiktok}</span>
-          </a>
         </div>
 
         {/* Value Badges */}

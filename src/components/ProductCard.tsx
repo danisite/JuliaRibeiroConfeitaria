@@ -94,7 +94,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         {/* Price & Action Row */}
         <div className="pt-3 border-t border-[#F5EDE8] flex items-center justify-between gap-2">
           <div>
-            <span className="text-[10px] text-[#9E837D] block">A partir de</span>
+            <span className="text-[10px] text-[#9E837D] block">
+              {product.portionOptions && product.portionOptions.length > 0 ? 'A partir de' : 'Valor'}
+            </span>
             <span className="text-lg font-bold text-[#382B29]">
               {formatCurrency(product.price)}
             </span>
@@ -105,7 +107,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               onClick={() => onSelectProduct(product)}
               className="px-3 py-2 rounded-xl text-xs font-medium text-[#63504C] bg-[#F7EFEA] hover:bg-[#EFE3DC] transition cursor-pointer"
             >
-              Personalizar
+              {product.portionOptions && product.portionOptions.length > 0 ? 'Personalizar' : 'Ver Detalhes'}
             </button>
             <button
               onClick={() => onQuickAdd(product)}

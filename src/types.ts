@@ -1,5 +1,6 @@
 export type CategoryId = 
   | 'todos'
+  | 'pudins'
   | 'bolos'
   | 'doces-finos'
   | 'tortas'

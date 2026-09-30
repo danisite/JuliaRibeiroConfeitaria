@@ -12,12 +12,29 @@ import { Product } from '../types';
 import { PRODUCTS } from '../data/sweets';
 import { ProductCard } from './ProductCard';
 
-export type CatalogCategoryFilter = 'todos' | 'bolos' | 'doces' | 'sobremesas';
+export type CatalogCategoryFilter = 'todos' | 'pudins' | 'bolos' | 'doces' | 'sobremesas';
 
 interface CatalogProps {
   onSelectProduct: (product: Product) => void;
   onQuickAdd: (product: Product) => void;
 }
+
+const PudimIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M6 17 8 8a2 2 0 0 1 2-1h4a2 2 0 0 1 2 1l2 9" />
+    <path d="M3 17h18a2 2 0 0 1 2 2c0 .6-.4 1-1 1H2c-.6 0-1-.4-1-1a2 2 0 0 1 2-2z" />
+    <path d="M9.5 7v3a1 1 0 0 0 1 1h.5" />
+    <path d="M13.5 7v2a1 1 0 0 0 1 1h.5" />
+  </svg>
+);
 
 const FILTER_TABS: {
   id: CatalogCategoryFilter;
@@ -25,6 +42,7 @@ const FILTER_TABS: {
   icon: React.ComponentType<{ className?: string }>;
 }[] = [
   { id: 'todos', label: 'Todos', icon: LayoutGrid },
+  { id: 'pudins', label: 'Pudins', icon: PudimIcon },
   { id: 'bolos', label: 'Bolos', icon: Cake },
   { id: 'doces', label: 'Doces', icon: Cookie },
   { id: 'sobremesas', label: 'Sobremesas', icon: IceCream },
@@ -47,6 +65,7 @@ export const Catalog: React.FC<CatalogProps> = ({
   // Filter products according to selected category
   const filteredProducts = PRODUCTS.filter((product) => {
     if (activeFilter === 'todos') return true;
+    if (activeFilter === 'pudins') return product.category === 'pudins';
     if (activeFilter === 'bolos') return product.category === 'bolos';
     if (activeFilter === 'doces') return product.category === 'doces-finos';
     if (activeFilter === 'sobremesas') return product.category === 'sobremesas' || product.category === 'tortas';
@@ -55,6 +74,7 @@ export const Catalog: React.FC<CatalogProps> = ({
 
   const getFilterCount = (filterId: CatalogCategoryFilter) => {
     if (filterId === 'todos') return PRODUCTS.length;
+    if (filterId === 'pudins') return PRODUCTS.filter((p) => p.category === 'pudins').length;
     if (filterId === 'bolos') return PRODUCTS.filter((p) => p.category === 'bolos').length;
     if (filterId === 'doces') return PRODUCTS.filter((p) => p.category === 'doces-finos').length;
     if (filterId === 'sobremesas') return PRODUCTS.filter((p) => p.category === 'sobremesas' || p.category === 'tortas').length;
@@ -140,9 +160,10 @@ export const Catalog: React.FC<CatalogProps> = ({
               Cardápio de Bolos & Doces
             </h2>
             <p className="text-sm sm:text-base text-[#6E5955] leading-relaxed">
+              {activeFilter === 'pudins' && 'Pudins artesanais extremamente cremosos e aveludados com calda caramelizada dourada, pesando aprox. 2kg e rendendo de 8 a 12 fatias generosas.'}
               {activeFilter === 'bolos' && 'Bolos artesanais festivos decorados com frutas frescas, chantilly aveludado e massas fofinhas feitas com 5 dias de antecedência.'}
               {activeFilter === 'doces' && 'Doces finos, brigadeiros gourmet enrolados à mão e caixas para presentear com afeto em Belo Horizonte.'}
-              {activeFilter === 'sobremesas' && 'Cheesecakes clássicos, tortas artesanais e taças da felicidade geladinhas prontas para comemorações.'}
+              {activeFilter === 'sobremesas' && 'Cheesecakes clássicos, tortas artesanais e sobremesas geladinhas prontas para comemorações.'}
               {activeFilter === 'todos' && 'Cada doce é elaborado artesanalmente com ingredientes naturais e frescos e 5 dias de antecedência. Filtre pelas abas ou deslize para explorar.'}
             </p>
           </div>
@@ -213,7 +234,19 @@ export const Catalog: React.FC<CatalogProps> = ({
         </div>
 
         {/* Products Display */}
-        {filteredProducts.length > 0 ? (
+        {PRODUCTS.length === 0 ? (
+          <div className="text-center py-16 sm:py-20 px-6 bg-[#FCFAF8] rounded-3xl border border-[#F2E6E1] max-w-xl mx-auto shadow-2xs">
+            <div className="w-14 h-14 rounded-full bg-[#FAF0EC] border border-[#F2DDD5] flex items-center justify-center mx-auto mb-4 text-[#A86454]">
+              <Sparkles className="w-6 h-6" />
+            </div>
+            <h3 className="font-serif-display text-2xl text-[#3D2E2B] mb-2 font-normal">
+              Cardápio em Preparação
+            </h3>
+            <p className="text-xs sm:text-sm text-[#78615C] max-w-md mx-auto leading-relaxed">
+              Todas as opções de exemplo foram removidas. A estrutura de categorias e filtros está pronta para receber os produtos reais da Julia Ribeiro Confeitaria!
+            </p>
+          </div>
+        ) : filteredProducts.length > 0 ? (
           filteredProducts.length > 1 ? (
             <div className="relative">
               {/* Horizontal Scroll Carousel */}
